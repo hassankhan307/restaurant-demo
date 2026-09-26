@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ember & Olive | Wood-Fired Dining in Karachi</title>
+<meta name="description" content="Ember & Olive is a modern Karachi dining experience combining wood-fired cooking, Mediterranean influences and warm hospitality.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --charcoal:#17130F; --charcoal-2:#221C16; --cream:#F4EFE4; --cream-dim:#D9D2C2;
+  --olive:#6E7350; --terracotta:#B1583A; --brass:#B08A56; --line:rgba(244,239,228,.14);
+  --serif:'Fraunces',Georgia,'Times New Roman',serif; --sans:'Work Sans',-apple-system,Segoe UI,sans-serif;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--charcoal);color:var(--cream);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden}
+img,svg{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em}
+a{color:inherit}
+.btn{display:inline-block;padding:15px 30px;font-family:var(--sans);font-size:.82rem;letter-spacing:.06em;text-decoration:none;border:1px solid currentColor;transition:background .25s,color .25s,border-color .25s;cursor:pointer;background:none}
+.btn-solid{background:var(--terracotta);border-color:var(--terracotta);color:var(--cream)}
+.btn-solid:hover{background:#98462b}
+.btn-ghost{color:var(--cream);border-color:rgba(244,239,228,.5)}
+.btn-ghost:hover{border-color:var(--cream)}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;color:var(--brass);margin-bottom:14px}
+.section{padding:110px 0}
+.section-tight{padding:80px 0}
+@media(max-width:720px){.section{padding:72px 0}.section-tight{padding:56px 0}.wrap{padding:0 20px}}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:env(safe-area-inset-top,0px) 0 0;transition:background .3s,border-color .3s}
+header.solid{background:rgba(23,19,15,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.navrow{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{font-family:var(--serif);font-size:1.25rem;letter-spacing:.02em;text-decoration:none}
+.links{display:flex;gap:34px;list-style:none}
+.links a{text-decoration:none;font-size:.86rem;color:var(--cream-dim);transition:color .2s}
+.links a:hover{color:var(--cream)}
+.navcta{display:flex;align-items:center;gap:18px}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.hamburger span{width:24px;height:1.5px;background:var(--cream)}
+.mobilemenu{position:fixed;inset:0;background:var(--charcoal);z-index:99;display:flex;flex-direction:column;justify-content:center;gap:26px;padding:0 32px;transform:translateY(-100%);transition:transform .35s ease}
+.mobilemenu.open{transform:translateY(0)}
+.mobilemenu a{font-family:var(--serif);font-size:1.6rem;text-decoration:none}
+.mobilemenu .close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer}
+@media(max-width:880px){.links,.navcta .btn-ghost{display:none}.hamburger{display:flex}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding-bottom:90px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(177,88,58,.35), transparent 55%),
+    radial-gradient(ellipse at 75% 75%, rgba(110,115,80,.25), transparent 55%),
+    linear-gradient(180deg, #0e0b09 0%, #1c1510 55%, #17130F 100%);
+}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.015) 0 2px,transparent 2px 5px)}
+.hero-inner{position:relative;z-index:2;max-width:760px}
+.hero .eyebrow{color:var(--brass)}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.03;margin-bottom:22px}
+.hero p{max-width:480px;color:var(--cream-dim);margin-bottom:34px;font-size:1.05rem}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.scrollcue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:1px;height:46px;background:linear-gradient(var(--brass),transparent);z-index:2}
+.scrollcue::after{content:"";position:absolute;top:0;left:-3px;width:7px;height:7px;border-radius:50%;background:var(--brass);animation:cue 2.2s infinite}
+@keyframes cue{0%{top:0;opacity:1}90%{opacity:0}100%{top:40px;opacity:0}}
+
+/* PHILOSOPHY - editorial asymmetric */
+.philosophy{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.philo-art{aspect-ratio:4/5;background:linear-gradient(155deg,#2a1f16,#1c1510 40%,#3a2416 100%);position:relative;border:1px solid var(--line)}
+.philo-art::before{content:"";position:absolute;inset:18px;border:1px solid rgba(177,88,58,.4)}
+.philosophy h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:24px;max-width:9ch}
+.philosophy p{color:var(--cream-dim);max-width:52ch;margin-bottom:16px}
+@media(max-width:860px){.philosophy{grid-template-columns:1fr;gap:36px}.philo-art{order:-1}}
+
+/* EXPERIENCE */
+.exp-list{border-top:1px solid var(--line)}
+.exp-item{display:grid;grid-template-columns:70px 1fr 1.3fr;gap:30px;padding:34px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding-left .3s}
+.exp-item:hover{padding-left:10px}
+.exp-num{font-family:var(--serif);color:var(--brass);font-size:1rem}
+.exp-item h3{font-size:1.35rem}
+.exp-item p{color:var(--cream-dim);max-width:44ch}
+@media(max-width:720px){.exp-item{grid-template-columns:40px 1fr;row-gap:8px}.exp-item p{grid-column:2}}
+
+/* MENU */
+.menu-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px;border-bottom:1px solid var(--line);padding-bottom:24px}
+.tab{background:none;border:1px solid var(--line);color:var(--cream-dim);padding:9px 18px;font-family:var(--sans);font-size:.82rem;cursor:pointer;transition:all .2s}
+.tab.active,.tab:hover{border-color:var(--brass);color:var(--cream)}
+.dish-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line)}
+.dish{background:var(--charcoal);padding:26px;cursor:pointer;transition:background .2s}
+.dish:hover{background:var(--charcoal-2)}
+.dish-top{display:flex;justify-content:space-between;gap:14px;margin-bottom:8px}
+.dish h4{font-family:var(--serif);font-size:1.15rem;font-weight:500}
+.dish .price{color:var(--brass);font-size:.92rem;white-space:nowrap}
+.dish p{color:var(--cream-dim);font-size:.9rem;margin-bottom:10px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.66rem;letter-spacing:.05em;border:1px solid rgba(110,115,80,.6);color:#B7BE95;padding:3px 8px}
+.tag.pick{border-color:var(--brass);color:var(--brass)}
+.pricenote{font-size:.72rem;color:var(--cream-dim);opacity:.6;margin-top:34px}
+@media(max-width:640px){.dish-grid{grid-template-columns:1fr}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,8,6,.82);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--charcoal-2);border:1px solid var(--line);max-width:460px;width:100%;padding:36px;position:relative;max-height:88vh;overflow-y:auto}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--cream-dim);font-size:1.4rem;cursor:pointer;line-height:1}
+.modal-img{aspect-ratio:16/9;background:linear-gradient(140deg,#3a2416,#1c1510);margin-bottom:20px;border:1px solid var(--line)}
+.modal h3{font-size:1.5rem;margin-bottom:6px}
+.modal .price{color:var(--brass);margin-bottom:14px;display:block}
+.modal .field{margin-bottom:12px;font-size:.88rem;color:var(--cream-dim)}
+.modal .field b{color:var(--cream);font-weight:500}
+
+/* RESERVATION */
+.res-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px}
+.res-side p{color:var(--cream-dim);margin-bottom:20px;max-width:36ch}
+.res-side .btn{margin-right:10px;margin-bottom:10px}
+form.resform{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field-full{grid-column:1/-1}
+label{display:block;font-size:.76rem;letter-spacing:.05em;color:var(--cream-dim);margin-bottom:7px}
+input,select,textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--cream);padding:10px 2px;font-family:var(--sans);font-size:.95rem}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brass)}
+textarea{resize:vertical;min-height:60px}
+.resform .btn{grid-column:1/-1;justify-self:start;margin-top:6px}
+select option{background:var(--charcoal)}
+@media(max-width:860px){.res-wrap{grid-template-columns:1fr;gap:32px}form.resform{grid-template-columns:1fr}}
+
+/* TESTIMONIALS */
+.testi{max-width:640px;margin:0 auto;text-align:center}
+.testi-quote{font-family:var(--serif);font-size:1.5rem;line-height:1.4;min-height:5.6em;display:flex;align-items:center;justify-content:center}
+.testi-name{color:var(--brass);margin-top:18px;font-size:.9rem}
+.testi-dots{display:flex;justify-content:center;gap:9px;margin-top:26px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line);border:none;cursor:pointer;padding:0}
+.dot.active{background:var(--brass)}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--cream);font-family:var(--serif);font-size:1.1rem;padding:22px 0;display:flex;justify-content:space-between;cursor:pointer}
+.faq-plus{color:var(--brass);transition:transform .25s}
+.faq-item.open .faq-plus{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{color:var(--cream-dim);padding-bottom:22px;max-width:60ch}
+
+/* LOCATION / FOOTER */
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.loc-map{aspect-ratio:4/3;background:repeating-linear-gradient(45deg,#241c15,#241c15 12px,#1c150f 12px,#1c150f 24px);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--cream-dim);font-size:.8rem;text-align:center;padding:20px}
+.hours-row{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:14px 0;font-size:.9rem}
+.loc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+@media(max-width:860px){.loc-grid{grid-template-columns:1fr;gap:34px}}
+footer{border-top:1px solid var(--line);padding:60px 0 30px}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px;margin-bottom:40px}
+.foot-links{display:flex;flex-direction:column;gap:10px}
+.foot-links a{text-decoration:none;color:var(--cream-dim);font-size:.9rem}
+.foot-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.75rem;color:var(--cream-dim);opacity:.75}
+
+/* mobile sticky CTA */
+.mobilebar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(23,19,15,.97);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+.mobilebar-row{display:flex;gap:10px}
+.mobilebar a,.mobilebar button{flex:1;text-align:center;padding:12px 4px;font-size:.78rem;border:1px solid var(--line);background:none;color:var(--cream);text-decoration:none}
+.mobilebar .primary{background:var(--terracotta);border-color:var(--terracotta)}
+@media(max-width:720px){.mobilebar{display:block}body{padding-bottom:66px}}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* GALLERY */
+.gallery-grid{column-count:3;column-gap:2px}
+.gtile{break-inside:avoid;margin-bottom:2px;position:relative;cursor:pointer;overflow:hidden;border:1px solid var(--line);display:block;width:100%;padding:0;background:none}
+.gtile:nth-child(3n+1){aspect-ratio:3/4}
+.gtile:nth-child(3n+2){aspect-ratio:1/1}
+.gtile:nth-child(3n){aspect-ratio:4/5}
+.gart-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--brass);opacity:.55}
+.gart-icon svg{width:34px;height:34px}
+.gtile-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;font-size:.7rem;letter-spacing:.03em;background:linear-gradient(transparent,rgba(10,8,6,.8));color:var(--cream-dim);opacity:0;transition:opacity .25s;text-align:left}
+.gtile:hover .gtile-label,.gtile:focus-visible .gtile-label{opacity:1}
+.gcat-food{background:linear-gradient(150deg,#3a2118,#1c130d 60%,#4a2a18)}
+.gcat-interior{background:linear-gradient(150deg,#2a2e1c,#1c1c12 60%,#3a3e22)}
+.gcat-kitchen{background:linear-gradient(150deg,#241c15,#17130f 60%,#332619)}
+.gcat-moments{background:linear-gradient(150deg,#3a2416,#22160f 60%,#4a3020)}
+@media(max-width:720px){.gallery-grid{column-count:2}}
+.lightbox .modal{max-width:600px;background:var(--charcoal-2)}
+.lightbox-art{aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;color:var(--brass);margin-bottom:16px}
+.lightbox-art svg{width:56px;height:56px}
+.lightbox-nav{display:flex;justify-content:space-between;align-items:center}
+.lightbox-nav button{background:none;border:1px solid var(--line);color:var(--cream);padding:9px 16px;cursor:pointer;font-size:.8rem}
+
+/* KITCHEN TO TABLE */
+.compare{position:relative;aspect-ratio:16/8;border:1px solid var(--line);overflow:hidden;user-select:none}
+.compare-layer{position:absolute;inset:0;display:flex;align-items:flex-end;padding:22px}
+.compare-layer span{font-family:var(--serif);font-size:1.15rem;background:rgba(10,8,6,.55);padding:7px 16px}
+.compare-after{background:linear-gradient(135deg,#2a2416,#3a2a16 60%,#4a3218)}
+.compare-before{background:linear-gradient(135deg,#241c15,#1c150f 60%,#120e0a);clip-path:inset(0 50% 0 0)}
+.compare-handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--brass);pointer-events:none;transform:translateX(-1px)}
+.compare-handle::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;background:var(--brass);border-radius:50%}
+.compare input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+
+/* VIRTUAL TOUR */
+.tour{position:relative;aspect-ratio:16/9;border:1px solid var(--line);overflow:hidden}
+.tour-scene{position:absolute;inset:0;display:flex;align-items:flex-end;padding:28px;opacity:0;transition:opacity .4s}
+.tour-scene.active{opacity:1}
+.tour-scene span{font-family:var(--serif);font-size:1.3rem;display:block;margin-bottom:6px}
+.tour-scene p{color:var(--cream-dim);font-size:.85rem;max-width:40ch}
+.tour-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.tour-nav button{background:none;border:1px solid var(--line);color:var(--cream);padding:9px 18px;cursor:pointer;font-size:.82rem}
+.tour-count{font-size:.8rem;color:var(--cream-dim)}
+
+/* AI CONCIERGE */
+.concierge{border:1px solid var(--line)}
+.concierge-log{height:260px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.cmsg{max-width:80%;padding:10px 14px;font-size:.9rem;line-height:1.5}
+.cmsg.bot{background:var(--charcoal-2);align-self:flex-start}
+.cmsg.user{background:var(--terracotta);align-self:flex-end}
+.concierge-suggest{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 14px}
+.concierge-suggest button{background:none;border:1px solid var(--line);color:var(--cream-dim);font-size:.75rem;padding:6px 12px;cursor:pointer}
+.concierge-input{display:flex;border-top:1px solid var(--line)}
+.concierge-input input{border:none;flex:1;padding:14px 16px}
+.concierge-input button{background:var(--terracotta);border:none;color:var(--cream);padding:0 20px;cursor:pointer;font-size:.8rem}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap navrow">
+    <a href="#top" class="logo">EMBER &amp; OLIVE</a>
+    <ul class="links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#private">Private Dining</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="navcta">
+      <a href="#reserve" class="btn btn-ghost">Reserve a Table</a>
+      <button class="hamburger" id="hamBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobilemenu" id="mobileMenu">
+  <button class="close" id="mobileClose" aria-label="Close menu">×</button>
+  <a href="#story">Our Story</a>
+  <a href="#menu">Menu</a>
+  <a href="#experience">Experience</a>
+  <a href="#private">Private Dining</a>
+  <a href="#contact">Contact</a>
+  <a href="#reserve" class="btn btn-solid" style="width:fit-content;margin-top:10px">Reserve a Table</a>
+</div>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Wood-fired · Mediterranean · Karachi</p>
+      <h1>Where fire meets flavor.</h1>
+      <p>An intimate dining experience shaped by fire, fresh ingredients, and modern Mediterranean cooking.</p>
+      <div class="hero-ctas">
+        <a href="#reserve" class="btn btn-solid">Reserve a Table</a>
+        <a href="#menu" class="btn btn-ghost">Explore the Menu</a>
+      </div>
+    </div>
+    <div class="scrollcue"></div>
+  </section>
+
+  <section class="section" id="story">
+    <div class="wrap philosophy reveal">
+      <div>
+        <p class="eyebrow">The philosophy</p>
+        <h2>Simple ingredients, serious fire.</h2>
+        <p>Every dish at Ember &amp; Olive begins with live flame. We built the kitchen around an open hearth, not a range — it changes how we buy, how we prep, and how a plate finally tastes.</p>
+        <p>The menu moves with the produce worth celebrating that week, and stays honest to a Mediterranean table: good oil, citrus, char, and restraint.</p>
+      </div>
+      <div class="philo-art" role="img" aria-label="Atmospheric illustration of the open-fire kitchen" style="display:flex;align-items:center;justify-content:center;color:var(--brass);opacity:.6">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:70px;height:70px"><path d="M12 2.5c1.5 3-1 4.5-1.2 7.3A3.2 3.2 0 0014 13a3 3 0 003-3c0-1-.5-1.8-.8-2.6 2.8 2 4.3 5 4.3 8a8.5 8.5 0 01-17 0c0-4.2 2.3-6.6 4.3-8.6.9 1.8.9 3 1.8 3s1.4-2 1.4-3.6-.5-2.4 0-3.6z"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="experience">
+    <div class="wrap">
+      <p class="eyebrow">The experience</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:34px">Four things we won't compromise on</h2>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-num">01</span><h3>Open Fire</h3><p>Cooking over live flame brings depth, character and an unmistakable aroma to everything that leaves the kitchen.</p></div>
+        <div class="exp-item"><span class="exp-num">02</span><h3>Seasonal Ingredients</h3><p>Our menu changes with the produce worth celebrating, not the other way around.</p></div>
+        <div class="exp-item"><span class="exp-num">03</span><h3>Crafted Cocktails</h3><p>A short, considered bar list designed to sit alongside the kitchen, not compete with it.</p></div>
+        <div class="exp-item"><span class="exp-num">04</span><h3>Intimate Dining</h3><p>Warm interiors, attentive service and a room built for lingering over a long dinner.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="wrap">
+      <p class="eyebrow">From the fire</p>
+      <h2 style="font-size:clamp(1.8rem,3.8vw,2.5rem);margin-bottom:34px">The Menu</h2>
+      <div class="menu-tabs" id="menuTabs"></div>
+      <div class="dish-grid" id="dishGrid"></div>
+      <p class="pricenote">Demo prices shown in PKR for illustration only.</p>
+    </div>
+  </section>
+
+  <section class="section-tight" id="gallery">
+    <div class="wrap">
+      <p class="eyebrow">Gallery</p>
+      <h2 style="font-size:clamp(1.8rem,3.8vw,2.5rem);margin-bottom:30px">A closer look</h2>
+      <div class="menu-tabs" id="galleryFilters"></div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <section class="section-tight" style="background:var(--charcoal-2)">
+    <div class="wrap">
+      <p class="eyebrow">From kitchen to table</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:14px">Preparation to plate</h2>
+      <p style="color:var(--cream-dim);max-width:52ch;margin-bottom:26px">Drag the divider to compare what happens over the fire with what reaches your table.</p>
+      <div class="compare">
+        <div class="compare-layer compare-after"><span>Final Plate</span></div>
+        <div class="compare-layer compare-before" id="compareBefore"><span>Preparation</span></div>
+        <div class="compare-handle" id="compareHandle"></div>
+        <input type="range" min="0" max="100" value="50" id="compareRange" aria-label="Compare preparation and final plate">
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="tour">
+    <div class="wrap">
+      <p class="eyebrow">Step inside</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:26px">Walk through the room</h2>
+      <div class="tour" id="tourStage"></div>
+      <div class="tour-nav">
+        <button id="tourPrev" type="button">← Previous</button>
+        <span class="tour-count" id="tourCount"></span>
+        <button id="tourNext" type="button">Next →</button>
+      </div>
+      <p style="font-size:.72rem;opacity:.6;margin-top:12px">Interactive tour concept — available for final website.</p>
+    </div>
+  </section>
+
+  <section class="section-tight" id="reserve">
+    <div class="wrap res-wrap">
+      <div class="res-side reveal">
+        <p class="eyebrow">Reserve your table</p>
+        <h2 style="font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:16px">Join us for dinner</h2>
+        <p>Prefer to book by chat? A message to our WhatsApp line works just as well as the form.</p>
+        <a href="#" class="btn btn-ghost" id="whatsappBtn">Book via WhatsApp</a>
+        <p style="font-size:.78rem;opacity:.65;margin-top:14px">Demo — connects to a placeholder number only.</p>
+      </div>
+      <form class="resform" id="resForm" novalidate>
+        <div><label for="rDate">Date</label><input type="date" id="rDate" required></div>
+        <div><label for="rTime">Time</label>
+          <select id="rTime" required>
+            <option value="">Select time</option>
+            <option>6:00 PM</option><option>6:30 PM</option><option>7:00 PM</option><option>7:30 PM</option>
+            <option>8:00 PM</option><option>8:30 PM</option><option>9:00 PM</option><option>9:30 PM</option>
+          </select>
+        </div>
+        <div><label for="rGuests">Guests</label><input type="number" id="rGuests" min="1" max="20" required></div>
+        <div><label for="rName">Name</label><input type="text" id="rName" required></div>
+        <div><label for="rPhone">Phone</label><input type="tel" id="rPhone" required></div>
+        <div><label for="rEmail">Email</label><input type="email" id="rEmail" required></div>
+        <div class="field-full"><label for="rNote">Special Request</label><textarea id="rNote"></textarea></div>
+        <button type="submit" class="btn btn-solid">Request Reservation</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section-tight" id="private" style="background:var(--charcoal-2)">
+    <div class="wrap">
+      <p class="eyebrow">Private dining</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:14px">Celebrate differently</h2>
+      <p style="color:var(--cream-dim);max-width:48ch;margin-bottom:30px">Four rooms, four moods — from a quiet dinner for two guests to a full corporate evening.</p>
+      <div class="exp-list" style="border-top:none">
+        <div class="exp-item" style="grid-template-columns:1fr 1.3fr"><h3 style="font-size:1.1rem">Private Dinner</h3><p>A quiet table away from the main room.</p></div>
+        <div class="exp-item" style="grid-template-columns:1fr 1.3fr"><h3 style="font-size:1.1rem">Corporate Events</h3><p>Set menus built for group dining and timing.</p></div>
+        <div class="exp-item" style="grid-template-columns:1fr 1.3fr"><h3 style="font-size:1.1rem">Birthdays</h3><p>A dedicated space with a menu you help shape.</p></div>
+        <div class="exp-item" style="grid-template-columns:1fr 1.3fr"><h3 style="font-size:1.1rem">Intimate Celebrations</h3><p>Small parties, unhurried service.</p></div>
+      </div>
+      <a href="#contact" class="btn btn-ghost" style="margin-top:30px">Enquire About Your Event</a>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap testi">
+      <p class="eyebrow" style="text-align:center">Guests, in their words</p>
+      <div class="testi-quote" id="testiQuote"></div>
+      <p class="testi-name" id="testiName"></p>
+      <div class="testi-dots" id="testiDots"></div>
+      <p style="font-size:.72rem;opacity:.6;margin-top:24px">Demo reviews for illustration only.</p>
+    </div>
+  </section>
+
+  <section class="section-tight" style="background:var(--charcoal-2)">
+    <div class="wrap" style="max-width:640px">
+      <p class="eyebrow">Ask our dining concierge</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:20px">Not sure what to order?</h2>
+      <div class="concierge">
+        <div class="concierge-log" id="conciergeLog"></div>
+        <div class="concierge-suggest" id="conciergeSuggest"></div>
+        <form class="concierge-input" id="conciergeForm">
+          <input type="text" id="conciergeInput" placeholder="Ask a question…" aria-label="Ask the dining concierge">
+          <button type="submit">Send</button>
+        </form>
+      </div>
+      <p style="font-size:.72rem;opacity:.6;margin-top:12px">AI concierge concept — can be connected to an AI service in the final website.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap" style="max-width:760px">
+      <p class="eyebrow">Questions</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:20px">Frequently Asked</h2>
+      <div id="faqList"></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="contact">
+    <div class="wrap loc-grid">
+      <div>
+        <p class="eyebrow">Find us</p>
+        <h2 style="font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:20px">Karachi, Pakistan</h2>
+        <div class="hours-row"><span>Mon – Thu</span><span>6:00 PM – 11:30 PM</span></div>
+        <div class="hours-row"><span>Fri – Sun</span><span>6:00 PM – 12:00 AM</span></div>
+        <div class="hours-row"><span>Phone</span><span>+92 XXX XXXXXXX</span></div>
+        <div class="hours-row"><span>WhatsApp</span><span>+92 XXX XXXXXXX</span></div>
+        <div class="loc-actions">
+          <a href="#" class="btn btn-ghost">Get Directions</a>
+          <a href="#" class="btn btn-ghost">Call Restaurant</a>
+          <a href="#" class="btn btn-solid">WhatsApp</a>
+        </div>
+      </div>
+      <div class="loc-map">Map placeholder — demo only</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="logo" style="display:block;margin-bottom:8px">EMBER &amp; OLIVE</p>
+        <p style="color:var(--cream-dim);font-size:.9rem">Where Fire Meets Flavor.</p>
+      </div>
+      <div class="foot-links">
+        <a href="#story">Our Story</a><a href="#menu">Menu</a><a href="#experience">Experience</a>
+        <a href="#private">Private Dining</a><a href="#contact">Contact</a>
+      </div>
+      <div class="foot-links">
+        <span style="color:var(--cream-dim);font-size:.9rem">Karachi, Pakistan</span>
+        <a href="#">Instagram</a><a href="#">Facebook</a><a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>DEMO WEBSITE — restaurant name, menu, prices, reviews, staff and contact details are fictional.</span>
+      <span>Website concept by HS Web Studio</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobilebar">
+  <div class="mobilebar-row">
+    <a href="tel:+92">Call</a>
+    <a href="#" id="mobileWa">WhatsApp</a>
+    <a href="#reserve" class="primary">Reserve</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="dishModalOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="dishModalClose" aria-label="Close">×</button>
+    <div class="modal-img"></div>
+    <h3 id="mdName"></h3>
+    <span class="price" id="mdPrice"></span>
+    <div class="tags" id="mdTags" style="margin-bottom:16px"></div>
+    <div class="field"><b>Description</b><br><span id="mdDesc"></span></div>
+    <div class="field"><b>Ingredients</b><br><span id="mdIngr"></span></div>
+    <div class="field"><b>Allergens</b><br><span id="mdAllg"></span></div>
+  </div>
+</div>
+
+<div class="modal-overlay lightbox" id="lightboxOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="lightboxClose" aria-label="Close">×</button>
+    <div class="lightbox-art" id="lightboxArt"></div>
+    <div class="lightbox-nav">
+      <button type="button" id="lightboxPrev">← Previous</button>
+      <span id="lightboxLabel" style="font-size:.82rem;color:var(--cream-dim)"></span>
+      <button type="button" id="lightboxNext">Next →</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="confirmOverlay">
+  <div class="modal" role="dialog" aria-modal="true" style="text-align:center">
+    <button class="modal-close" id="confirmClose" aria-label="Close">×</button>
+    <h3 style="margin-bottom:14px">Reservation Request Received</h3>
+    <p id="confirmText" style="color:var(--cream-dim);margin-bottom:16px"></p>
+    <p style="font-size:.78rem;opacity:.65;margin-bottom:6px">This is a demonstration booking system.</p>
+    <p style="font-size:.78rem;opacity:.65">A real project can connect this to a POS, reservation platform, Google Calendar, email, WhatsApp or a custom backend.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var header=document.getElementById('siteHeader');
+  window.addEventListener('scroll',function(){header.classList.toggle('solid',window.scrollY>40)});
+
+  var hamBtn=document.getElementById('hamBtn'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+  function toggleMenu(open){mobileMenu.classList.toggle('open',open);hamBtn.setAttribute('aria-expanded',open)}
+  hamBtn.addEventListener('click',function(){toggleMenu(!mobileMenu.classList.contains('open'))});
+  mobileClose.addEventListener('click',function(){toggleMenu(false)});
+  mobileMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false)})});
+
+  ['whatsappBtn','mobileWa'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('click',function(e){
+      e.preventDefault();
+      alert('Demo: this would open WhatsApp to a placeholder number for Ember & Olive reservations.');
+    });
+  });
+
+  // Menu data
+  var MENU = {
+    "Starters":[
+      {n:"Charred Octopus",p:"PKR 2,950",d:"Preserved lemon, olive oil, herbs.",i:"Octopus, lemon, olive oil, parsley.",a:"Shellfish.",t:["Chef's Pick"]},
+      {n:"Smoked Aubergine Dip",p:"PKR 1,650",d:"Tahini, pomegranate, sourdough.",i:"Aubergine, tahini, pomegranate, bread.",a:"Sesame, gluten.",t:["Vegetarian"]}
+    ],
+    "From the Fire":[
+      {n:"Ember-Grilled Lamb",p:"PKR 3,250",d:"Rosemary, smoked aubergine, pomegranate.",i:"Lamb, rosemary, aubergine, pomegranate.",a:"None.",t:["Chef's Pick","Gluten-Free"]},
+      {n:"Wood-Fired Sea Bass",p:"PKR 3,850",d:"Seasonal vegetables, saffron beurre blanc.",i:"Sea bass, saffron, butter, seasonal vegetables.",a:"Fish, dairy.",t:["Gluten-Free"]},
+      {n:"Fire-Roasted Chicken",p:"PKR 2,450",d:"Charred lemon, garlic, rosemary.",i:"Chicken, lemon, garlic, rosemary.",a:"None.",t:["Gluten-Free"]}
+    ],
+    "Pasta":[
+      {n:"Truffle & Wild Mushroom Pasta",p:"PKR 2,650",d:"Parmesan, black pepper, herbs.",i:"Fresh pasta, wild mushroom, truffle, parmesan.",a:"Gluten, dairy.",t:["Vegetarian"]}
+    ],
+    "Desserts":[
+      {n:"Olive Oil Chocolate Tart",p:"PKR 1,450",d:"Sea salt, vanilla cream.",i:"Dark chocolate, olive oil, cream, sea salt.",a:"Dairy, eggs.",t:["Vegetarian"]}
+    ],
+    "Cocktails":[
+      {n:"Smoked Fig Negroni",p:"PKR 1,850",d:"Gin, campari, smoked fig syrup.",i:"Gin, campari, vermouth, fig.",a:"None.",t:["Vegan"]}
+    ],
+    "Coffee":[
+      {n:"Turkish Coffee",p:"PKR 650",d:"Slow-brewed, cardamom.",i:"Coffee, cardamom.",a:"None.",t:["Vegan"]}
+    ]
+  };
+  var tabsEl=document.getElementById('menuTabs'), gridEl=document.getElementById('dishGrid');
+  var cats=Object.keys(MENU), active=cats[1];
+  function renderTabs(){
+    tabsEl.innerHTML='';
+    cats.forEach(function(c){
+      var b=document.createElement('button');
+      b.className='tab'+(c===active?' active':'');
+      b.textContent=c; b.setAttribute('aria-pressed',c===active);
+      b.addEventListener('click',function(){active=c;renderTabs();renderGrid()});
+      tabsEl.appendChild(b);
+    });
+  }
+  function renderGrid(){
+    gridEl.innerHTML='';
+    MENU[active].forEach(function(item){
+      var d=document.createElement('div'); d.className='dish'; d.tabIndex=0; d.setAttribute('role','button');
+      d.innerHTML='<div class="dish-top"><h4>'+item.n+'</h4><span class="price">'+item.p+'</span></div>'+
+        '<p>'+item.d+'</p><div class="tags">'+item.t.map(function(t){return '<span class="tag'+(t==="Chef's Pick"?' pick':'')+'">'+t+'</span>'}).join('')+'</div>';
+      function open(){openDishModal(item)}
+      d.addEventListener('click',open);
+      d.addEventListener('keydown',function(e){if(e.key==='Enter')open()});
+      gridEl.appendChild(d);
+    });
+  }
+  renderTabs(); renderGrid();
+
+  var dishOverlay=document.getElementById('dishModalOverlay');
+  function openDishModal(item){
+    document.getElementById('mdName').textContent=item.n;
+    document.getElementById('mdPrice').textContent=item.p;
+    document.getElementById('mdDesc').textContent=item.d;
+    document.getElementById('mdIngr').textContent=item.i;
+    document.getElementById('mdAllg').textContent=item.a;
+    document.getElementById('mdTags').innerHTML=item.t.map(function(t){return '<span class="tag">'+t+'</span>'}).join('');
+    dishOverlay.classList.add('open');
+  }
+  document.getElementById('dishModalClose').addEventListener('click',function(){dishOverlay.classList.remove('open')});
+  dishOverlay.addEventListener('click',function(e){if(e.target===dishOverlay)dishOverlay.classList.remove('open')});
+
+  // Reservation form
+  var resForm=document.getElementById('resForm'), confirmOverlay=document.getElementById('confirmOverlay');
+  resForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!resForm.checkValidity()){resForm.reportValidity();return}
+    var name=document.getElementById('rName').value.trim();
+    var date=document.getElementById('rDate').value;
+    var time=document.getElementById('rTime').value;
+    var guests=document.getElementById('rGuests').value;
+    document.getElementById('confirmText').textContent='Thank you, '+name+'. Your reservation request for '+date+' at '+time+' for '+guests+' guests has been received.';
+    confirmOverlay.classList.add('open');
+    resForm.reset();
+  });
+  document.getElementById('confirmClose').addEventListener('click',function(){confirmOverlay.classList.remove('open')});
+  confirmOverlay.addEventListener('click',function(e){if(e.target===confirmOverlay)confirmOverlay.classList.remove('open')});
+
+  // Testimonials
+  var REVIEWS=[
+    {q:"The food, atmosphere and service felt completely effortless.",n:"Ayesha M."},
+    {q:"One of those evenings you wish could last a little longer.",n:"Omar K."},
+    {q:"Beautiful food, incredible atmosphere and exceptional attention to detail.",n:"Sara R."}
+  ];
+  var ti=0, tq=document.getElementById('testiQuote'), tn=document.getElementById('testiName'), td=document.getElementById('testiDots');
+  function renderTesti(){
+    tq.textContent='"'+REVIEWS[ti].q+'"'; tn.textContent='— '+REVIEWS[ti].n;
+    td.innerHTML=REVIEWS.map(function(_,idx){return '<button class="dot'+(idx===ti?' active':'')+'" aria-label="Show review '+(idx+1)+'"></button>'}).join('');
+    Array.from(td.children).forEach(function(dot,idx){dot.addEventListener('click',function(){ti=idx;renderTesti()})});
+  }
+  renderTesti();
+  setInterval(function(){ti=(ti+1)%REVIEWS.length;renderTesti()},6000);
+
+  // FAQ
+  var FAQ=[
+    {q:"Do you accept reservations?",a:"Yes — through this website or via WhatsApp."},
+    {q:"Do you accommodate dietary requirements?",a:"Yes, including vegetarian, vegan and gluten-free requests with notice."},
+    {q:"Is there a dress code?",a:"Smart casual is welcome throughout the dining room."},
+    {q:"Do you offer private dining?",a:"Yes — see the Private Dining section above for options."},
+    {q:"Do you have vegetarian options?",a:"Several dishes across every course are vegetarian or vegan."},
+    {q:"Do you accept walk-ins?",a:"Walk-ins are welcome, though reservations are recommended on weekends."},
+    {q:"Do you offer takeaway?",a:"Select dishes are available for takeaway and pickup."}
+  ];
+  var faqList=document.getElementById('faqList');
+  FAQ.forEach(function(item){
+    var wrap=document.createElement('div'); wrap.className='faq-item';
+    wrap.innerHTML='<button class="faq-q">'+item.q+'<span class="faq-plus">+</span></button><div class="faq-a"><p>'+item.a+'</p></div>';
+    var q=wrap.querySelector('.faq-q'), a=wrap.querySelector('.faq-a');
+    q.addEventListener('click',function(){
+      var isOpen=wrap.classList.contains('open');
+      wrap.classList.toggle('open',!isOpen);
+      a.style.maxHeight=isOpen?null:a.scrollHeight+'px';
+    });
+    faqList.appendChild(wrap);
+  });
+
+  // Shared vector icons (stand in for photography — see note below)
+  var ICONS={
+    flame:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2.5c1.5 3-1 4.5-1.2 7.3A3.2 3.2 0 0014 13a3 3 0 003-3c0-1-.5-1.8-.8-2.6 2.8 2 4.3 5 4.3 8a8.5 8.5 0 01-17 0c0-4.2 2.3-6.6 4.3-8.6.9 1.8.9 3 1.8 3s1.4-2 1.4-3.6-.5-2.4 0-3.6z"/></svg>',
+    leaf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20C12 20 20 12 20 4 12 4 4 12 4 20z"/><path d="M5 19c3-3 7-7 10-10"/></svg>',
+    chef:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 10a4 4 0 118 0 4 4 0 118 0c0 2.5-1.6 4-3 4.4V19H9v-4.6C7.6 14 6 12.5 6 10z"/><path d="M9 19h6v2H9z"/></svg>',
+    spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>'
+  };
+  var CATCLASS={Food:'gcat-food',Interior:'gcat-interior',Kitchen:'gcat-kitchen',Moments:'gcat-moments'};
+  var CATICON={Food:'flame',Interior:'leaf',Kitchen:'chef',Moments:'spark'};
+
+  // GALLERY
+  var GALLERY=[
+    {cat:'Food',label:'Ember-grilled lamb, tableside'},
+    {cat:'Food',label:'Charred octopus, ready to plate'},
+    {cat:'Food',label:'Wood-fired sea bass close-up'},
+    {cat:'Interior',label:'The main dining room at dusk'},
+    {cat:'Interior',label:'Bar and lounge seating'},
+    {cat:'Kitchen',label:'The open hearth at work'},
+    {cat:'Kitchen',label:'Chef plating a dish'},
+    {cat:'Moments',label:'A table mid-celebration'},
+    {cat:'Moments',label:'Cocktails at the bar'}
+  ];
+  var gFilters=document.getElementById('galleryFilters'), gGrid=document.getElementById('galleryGrid');
+  var gCats=['All','Food','Interior','Kitchen','Moments'], gActive='All', gVisible=[];
+  function renderGalleryFilters(){
+    gFilters.innerHTML='';
+    gCats.forEach(function(c){
+      var b=document.createElement('button');
+      b.className='tab'+(c===gActive?' active':''); b.textContent=c;
+      b.addEventListener('click',function(){gActive=c;renderGalleryFilters();renderGalleryGrid()});
+      gFilters.appendChild(b);
+    });
+  }
+  function renderGalleryGrid(){
+    gVisible=GALLERY.filter(function(it){return gActive==='All'||it.cat===gActive});
+    gGrid.innerHTML='';
+    gVisible.forEach(function(it,idx){
+      var t=document.createElement('button'); t.type='button';
+      t.className='gtile '+CATCLASS[it.cat];
+      t.innerHTML='<span class="gart-icon">'+ICONS[CATICON[it.cat]]+'</span><span class="gtile-label">'+it.cat+' — '+it.label+'</span>';
+      t.addEventListener('click',function(){openLightbox(idx)});
+      gGrid.appendChild(t);
+    });
+  }
+  renderGalleryFilters(); renderGalleryGrid();
+
+  var lbOverlay=document.getElementById('lightboxOverlay'), lbIdx=0;
+  function openLightbox(idx){
+    lbIdx=idx; renderLightbox(); lbOverlay.classList.add('open');
+  }
+  function renderLightbox(){
+    var it=gVisible[lbIdx];
+    document.getElementById('lightboxArt').innerHTML=ICONS[CATICON[it.cat]];
+    document.getElementById('lightboxArt').className='lightbox-art '+CATCLASS[it.cat];
+    document.getElementById('lightboxLabel').textContent=it.cat+' — '+it.label+'  ('+(lbIdx+1)+'/'+gVisible.length+')';
+  }
+  document.getElementById('lightboxClose').addEventListener('click',function(){lbOverlay.classList.remove('open')});
+  lbOverlay.addEventListener('click',function(e){if(e.target===lbOverlay)lbOverlay.classList.remove('open')});
+  document.getElementById('lightboxPrev').addEventListener('click',function(){lbIdx=(lbIdx-1+gVisible.length)%gVisible.length;renderLightbox()});
+  document.getElementById('lightboxNext').addEventListener('click',function(){lbIdx=(lbIdx+1)%gVisible.length;renderLightbox()});
+  document.addEventListener('keydown',function(e){
+    if(!lbOverlay.classList.contains('open'))return;
+    if(e.key==='Escape')lbOverlay.classList.remove('open');
+    if(e.key==='ArrowLeft')document.getElementById('lightboxPrev').click();
+    if(e.key==='ArrowRight')document.getElementById('lightboxNext').click();
+  });
+
+  // KITCHEN TO TABLE SLIDER
+  var cRange=document.getElementById('compareRange'), cBefore=document.getElementById('compareBefore'), cHandle=document.getElementById('compareHandle');
+  cRange.addEventListener('input',function(){
+    var v=cRange.value;
+    cBefore.style.clipPath='inset(0 '+(100-v)+'% 0 0)';
+    cHandle.style.left=v+'%';
+  });
+
+  // VIRTUAL TOUR
+  var TOUR=[
+    {title:'Dining Room',note:'The main room, built around warm light and close tables.',cat:'Interior'},
+    {title:'Open Kitchen',note:'Watch the hearth at work from your seat.',cat:'Kitchen'},
+    {title:'Private Dining',note:'A quieter room set aside for small groups.',cat:'Moments'},
+    {title:'Outdoor Terrace',note:'Karachi evenings, under open sky.',cat:'Food'}
+  ];
+  var tourStage=document.getElementById('tourStage'), tourCount=document.getElementById('tourCount'), tourIdx=0;
+  TOUR.forEach(function(sc,i){
+    var d=document.createElement('div');
+    d.className='tour-scene '+CATCLASS[sc.cat]+(i===0?' active':'');
+    d.innerHTML='<div><span>0'+(i+1)+' '+sc.title+'</span><p>'+sc.note+'</p></div>';
+    tourStage.appendChild(d);
+  });
+  function renderTour(){
+    Array.from(tourStage.children).forEach(function(el,i){el.classList.toggle('active',i===tourIdx)});
+    tourCount.textContent='0'+(tourIdx+1)+' / 0'+TOUR.length;
+  }
+  renderTour();
+  document.getElementById('tourPrev').addEventListener('click',function(){tourIdx=(tourIdx-1+TOUR.length)%TOUR.length;renderTour()});
+  document.getElementById('tourNext').addEventListener('click',function(){tourIdx=(tourIdx+1)%TOUR.length;renderTour()});
+
+  // AI CONCIERGE
+  var CRULES=[
+    {kw:['two','couple','2 people','for two'],reply:"For two guests, I'd suggest starting with the Charred Octopus, followed by the Ember-Grilled Lamb and Wood-Fired Sea Bass. Finish with the Olive Oil Chocolate Tart."},
+    {kw:['vegetarian','veg','plant'],reply:"The Smoked Aubergine Dip, Truffle & Wild Mushroom Pasta, and Olive Oil Chocolate Tart are all vegetarian."},
+    {kw:['vegan'],reply:"The Smoked Fig Negroni and Turkish Coffee are vegan — ask your server about vegan mains, prepared to order."},
+    {kw:['gluten'],reply:"The Ember-Grilled Lamb, Wood-Fired Sea Bass and Fire-Roasted Chicken are all gluten-free."},
+    {kw:['pair','wine','drink','cocktail','lamb'],reply:"The Smoked Fig Negroni pairs particularly well with the Ember-Grilled Lamb — smoke against smoke."},
+    {kw:['romantic','date','special occasion','anniversary'],reply:"For a romantic dinner, try the Wood-Fired Sea Bass, a Smoked Fig Negroni, and share the Olive Oil Chocolate Tart."}
+  ];
+  function conciergeReply(text){
+    var t=text.toLowerCase();
+    for(var i=0;i<CRULES.length;i++){
+      if(CRULES[i].kw.some(function(k){return t.indexOf(k)!==-1})) return CRULES[i].reply;
+    }
+    return "I'd recommend starting with the Charred Octopus, then asking your server about tonight's specials from the fire.";
+  }
+  var cLog=document.getElementById('conciergeLog'), cSuggest=document.getElementById('conciergeSuggest'), cForm=document.getElementById('conciergeForm'), cInput=document.getElementById('conciergeInput');
+  function addMsg(role,text){
+    var d=document.createElement('div'); d.className='cmsg '+role; d.textContent=text;
+    cLog.appendChild(d); cLog.scrollTop=cLog.scrollHeight;
+  }
+  addMsg('bot','Ask me what to order, or try one of the questions below.');
+  ['What should I order for two?','Which dishes are vegetarian?','What pairs well with the lamb?','Do you have gluten-free options?'].forEach(function(q){
+    var b=document.createElement('button'); b.type='button'; b.textContent=q;
+    b.addEventListener('click',function(){addMsg('user',q);setTimeout(function(){addMsg('bot',conciergeReply(q))},350)});
+    cSuggest.appendChild(b);
+  });
+  cForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var val=cInput.value.trim(); if(!val)return;
+    addMsg('user',val); cInput.value='';
+    setTimeout(function(){addMsg('bot',conciergeReply(val))},350);
+  });
+
+  // Scroll reveal
+  var reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.15});
+    reveals.forEach(function(el){io.observe(el)});
+  } else { reveals.forEach(function(el){el.classList.add('in')}); }
+})();
+</script>
+</body>
+</html>
